@@ -1,0 +1,197 @@
+SECTION B 
+QUESTION 1:
+Form controls:
+- Label: Username
+- TextBox: txtUsername
+- Label: Password
+- TextBox: txtPassword
+- Button: btnLogin
+- Button: btnClear
+Login code:
+Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+    If txtUsername.Text = "" Or txtPassword.Text = "" Then
+        MessageBox.Show("Please enter username and password.")
+    ElseIf txtUsername.Text = "admin" And txtPassword.Text = "1234" Then
+        MessageBox.Show("Login successful!")
+    Else
+        MessageBox.Show("Invalid username or password.")
+    End If
+End Sub
+Clear button:
+Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    txtUsername.Clear()
+    txtPassword.Clear()
+End Sub
+QUESTION 2:
+Discount rules:
+- Less than $100: 0% discount
+- $100 to $500: 10% discount
+- More than $500: 20% discount
+VB code:
+For i As Integer = 1 To 3
+    Dim total As Double
+    Dim discount As Double
+    Dim finalAmount As Double
+    total = CDbl(InputBox("Enter total amount for customer " & i))
+    If total < 100 Then
+        discount = 0
+    ElseIf total <= 500 Then
+        discount = total * 0.1
+    Else
+        discount = total * 0.2
+    End If
+    finalAmount = total - discount
+    MessageBox.Show("Customer " & i & vbCrLf &
+                    "Total: $" & total & vbCrLf &
+                    "Discount: $" & discount & vbCrLf &
+                    "Final Amount: $" & finalAmount)
+Next
+QUESTION 3
+Class: A blueprint or template used to create objects.
+Example:
+Class Student
+    Public Name As String
+    Public Age As Integer
+End Class
+Object:
+Dim student1 As New Student()
+student1.Name = "John"
+student1.Age = 20
+Inheritance allows one class to acquire properties and methods from another class.
+Example:
+Class Person
+    Public Name As String
+End Class
+Class Student
+    Inherits Person
+    Public Course As String
+End Class
+Polymorphism means that the same method can behave differently in different classes.
+Encapsulation is keeping data and the methods that operate on it inside a class while controlling access to the data. It protects data and prevents unwanted changes.
+Constructor:
+A constructor runs automatically when an object is created.
+Example:
+Class Student
+    Public Name As String
+    Public Sub New()
+        Name = "Unknown"
+    End Sub
+End Class
+Destructor/Finalizer:
+Used when an object is being removed from memory and is associated with releasing resources.
+QUESTION 4: 
+Three uses of collections:
+1. Storing multiple values.
+2. Adding, removing and searching for items.
+3. Processing groups of objects.
+Example:
+Dim names As New List(Of String)
+names.Add("John")
+names.Add("Mary")
+names.Add("Peter")
+For Each name In names
+    MessageBox.Show(name)
+Next
+MessageBox:
+A MessageBox is a popup window used to display information or ask a question.
+Example:
+MessageBox.Show("Welcome to the system")
+Common types:
+- OK
+- OKCancel
+- YesNo
+- YesNoCancel
+Solution Explorer:
+Solution Explorer is a Visual Studio window used to manage project files and components. It helps to view files, add forms and classes, open and edit files, organize components, and manage references and resources.
+QUESTION 5
+Form controls:
+- Label: lblName; TextBox: txtName
+- Label: lblICT; TextBox: txtICT
+- Label: lblVB; TextBox: txtVB
+- Label: lblResearch; TextBox: txtResearch
+- Label: lblCyber; TextBox: txtCyber
+- Button: btnCalculate
+- Button: btnClear
+- Button: btnSave
+- Label: lblResult
+Calculation and validation code:
+Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
+    Dim ict As Double
+    Dim vb As Double
+    Dim research As Double
+    Dim cyber As Double
+    Dim total As Double
+    Dim average As Double
+    Dim grade As String
+    Dim status As String
+    If txtName.Text = "" Or txtICT.Text = "" Or
+       txtVB.Text = "" Or txtResearch.Text = "" Or
+       txtCyber.Text = "" Then
+        MessageBox.Show("Please fill in all fields.")
+        Exit Sub
+    End If
+    If Not Double.TryParse(txtICT.Text, ict) Or
+       Not Double.TryParse(txtVB.Text, vb) Or
+       Not Double.TryParse(txtResearch.Text, research) Or
+       Not Double.TryParse(txtCyber.Text, cyber) Then
+        MessageBox.Show("Please enter numeric marks.")
+        Exit Sub
+    End If
+    If ict < 0 Or ict > 100 Or vb < 0 Or vb > 100 Or
+       research < 0 Or research > 100 Or cyber < 0 Or cyber > 100 Then
+        MessageBox.Show("Marks must be between 0 and 100.")
+        Exit Sub
+    End If
+    total = ict + vb + research + cyber
+    average = total / 4
+    If average >= 90 Then
+        grade = "A"
+    ElseIf average >= 80 Then
+        grade = "B"
+    ElseIf average >= 70 Then
+        grade = "C"
+    ElseIf average >= 60 Then
+        grade = "D"
+    Else
+        grade = "F"
+    End If
+    If average >= 60 Then
+        status = "PASS"
+    Else
+        status = "FAIL"
+    End If
+    lblResult.Text = "Student Name: " & txtName.Text & vbCrLf &
+                     "ICT: " & ict & vbCrLf &
+                     "Visual Basic: " & vb & vbCrLf &
+                     "Research Methods: " & research & vbCrLf &
+                     "Cyber & Computer Law: " & cyber & vbCrLf &
+                     "Total: " & total & vbCrLf &
+                     "Average: " & average & "%" & vbCrLf &
+                     "Overall Grade: " & grade & vbCrLf &
+                     "Status: " & status
+End Sub
+Clear button:
+Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    txtName.Clear()
+    txtICT.Clear()
+    txtVB.Clear()
+    txtResearch.Clear()
+    txtCyber.Clear()
+    lblResult.Text = ""
+End Sub
+Save button:
+Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Dim results As String = lblResult.Text
+    My.Computer.FileSystem.WriteAllText(
+        "StudentResults.txt",
+        results & vbCrLf & vbCrLf,
+        True)
+    MessageBox.Show("Results saved successfully.")
+End Sub
+Grade ranges:
+A = 90–100
+B = 80–89
+C = 70–79
+D = 60–69
+F = below 60
+Pass = average >= 60%
